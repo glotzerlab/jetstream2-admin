@@ -37,7 +37,7 @@
             dest: "{{ actions_path }}"
             remote_src: yes
         - name: Configure the actions runner
-          ansible.builtin.command: ./config.sh --url https://github.com/glotzerlab --token {{ token }} --unattended --name {{ inventory_hostname }} --labels jetstream --replace
+          ansible.builtin.command: ./config.sh --url https://github.com/glotzerlab --token {{ token }} --unattended --name {{ inventory_hostname }} --labels jetstream2 --replace
           args:
             chdir: "{{ actions_path }}"
         - name: Install the service
