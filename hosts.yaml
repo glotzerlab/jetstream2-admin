@@ -1,0 +1,9 @@
+all:
+  children:
+    actions_runners:
+      vars:
+        ansible_user: exouser
+
+      hosts:
+        actions-runner-0:
+          ansible_host: 149.165.159.7

@@ -1,0 +1,57 @@
+- name: Configure actions runners.
+  hosts: actions_runners
+  vars:
+    # TODO: determine latest actions version automatically
+    actions_version: 2.288.1
+    actions_path: /home/exouser/actions-runner
+  vars_prompt:
+    - name: token
+      prompt: "Enter the token"
+
+  tasks:
+    - name: Configure user account
+      become: yes
+      block:
+        - name: Add the user to the docker group
+          ansible.builtin.user:
+            name: "exouser"
+            state: present
+            groups: docker
+            append: yes
+
+    - name: Check if actions-runner exists
+      ansible.builtin.stat:
+        path: "{{ actions_path }}"
+      register: check_path
+
+    - name: Install the Github Actions runner
+      when: not check_path.stat.exists
+      block:
+        - name: Create the actions-runner directory
+          ansible.builtin.file:
+            path: "{{ actions_path }}"
+            state: directory
+        - name: Download the actions runner
+          ansible.builtin.unarchive:
+            src: https://github.com/actions/runner/releases/download/v{{ actions_version }}/actions-runner-linux-x64-{{ actions_version }}.tar.gz
+            dest: "{{ actions_path }}"
+            remote_src: yes
+        - name: Configure the actions runner
+          ansible.builtin.command: ./config.sh --url https://github.com/glotzerlab --token {{ token }} --unattended --name {{ inventory_hostname }} --labels jetstream --replace
+          args:
+            chdir: "{{ actions_path }}"
+        - name: Install the service
+          ansible.builtin.command: ./svc.sh install
+          become: yes
+          args:
+            chdir: "{{ actions_path }}"
+        - name: Start the service
+          ansible.builtin.command: ./svc.sh start
+          become: yes
+          args:
+            chdir: "{{ actions_path }}"
+      rescue:
+        - name: Error, removing actions-runner directory
+          ansible.builtin.file:
+            path: "{{ actions_path }}"
+            state: absent
