@@ -4,6 +4,17 @@ all:
       vars:
         ansible_user: exouser
 
-      hosts:
-        actions-runner-1:
-          ansible_host: 149.165.159.180
+      children:
+        gpu:
+          vars:
+            labels: gpu-test
+          hosts:
+            actions-runner-1:
+              ansible_host: 149.165.159.180
+
+        cpu:
+          vars:
+            labels: CPU
+          hosts:
+            actions-runner-cpu-0:
+              ansible_host: 149.165.159.48
