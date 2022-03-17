@@ -6,7 +6,7 @@
     actions_path: /home/exouser/actions-runner
   vars_prompt:
     - name: token
-      prompt: "Enter the token"
+      prompt: "Enter the token (may be empty if not provisioning new runners)"
 
   tasks:
     - name: Configure user account
@@ -55,3 +55,19 @@
           ansible.builtin.file:
             path: "{{ actions_path }}"
             state: absent
+
+    - name: Configure auto-shutdown
+      block:
+        - name: Copy shutdown script
+          ansible.builtin.copy:
+            src: auto-shutdown.sh
+            dest: /home/exouser/auto-shutdown.sh
+            owner: exouser
+            mode: '0755'
+        - name: Configure cron job
+          ansible.builtin.cron:
+            name: auto-shutdown
+            minute: "*/5"
+            job: "/home/exouser/auto-shutdown.sh >> /home/exouser/auto-shutdown.log 2>&1"
+            user: root
+          become: yes
