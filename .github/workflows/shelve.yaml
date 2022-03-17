@@ -1,0 +1,39 @@
+name: Shelve powered off instances
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+on:
+  schedule:
+      - cron:  '4 * * * *'
+
+  workflow_dispatch:
+
+jobs:
+  shelve_action_runners:
+    name: Shelve action runners
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.4.0
+        with:
+          path: code
+      - uses: actions/cache@v2.1.7
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-openstacksdk==0.61.0
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install openstack
+        run: python3 -m pip install openstacksdk==0.61.0
+      - name: Shelve action runners
+        run: python3 code/shelve-action-runners.py
+        env:
+          OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
+          OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
+          OS_AUTH_TYPE: v3applicationcredential
+          OS_AUTH_URL: https://js2.jetstream-cloud.org:5000/v3/
+          OS_IDENTITY_API_VERSION: 3
+          OS_REGION_NAME: "IU"
+          OS_INTERFACE: public
