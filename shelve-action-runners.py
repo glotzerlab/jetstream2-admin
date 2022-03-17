@@ -2,7 +2,6 @@
 
 import openstack
 import sys
-import time
 
 
 def shelve_runners(connection):
