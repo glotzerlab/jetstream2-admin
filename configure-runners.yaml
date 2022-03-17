@@ -1,5 +1,5 @@
-- name: Configure actions runners.
-  hosts: actions_runners
+- name: Configure action runners.
+  hosts: action_runners
   vars:
     # TODO: determine latest actions version automatically
     actions_version: 2.288.1

@@ -1,6 +1,6 @@
 all:
   children:
-    actions_runners:
+    action_runners:
       vars:
         ansible_user: exouser
 

@@ -1,0 +1,11 @@
+- name: Update action runners.
+  hosts: all
+
+  tasks:
+    - name: Update apt packages
+      become: yes
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+        upgrade: yes
+        autoclean: yes
