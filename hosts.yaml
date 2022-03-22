@@ -24,3 +24,11 @@ all:
               ansible_host: 149.165.159.243
             actions-runner-cpu-3:
               ansible_host: 149.165.159.227
+            actions-runner-cpu-4:
+              ansible_host: 149.165.159.34
+            actions-runner-cpu-5:
+              ansible_host: 149.165.159.120
+            actions-runner-cpu-6:
+              ansible_host: 149.165.159.58
+            actions-runner-cpu-7:
+              ansible_host: 149.165.159.161
