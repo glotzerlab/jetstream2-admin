@@ -27,6 +27,14 @@ HOOMD's GitHub Actions scripts run `start-action-runners.py` when needed. This r
 Both of these scripts may be run locally with the proper authentication token (see
 https://docs.jetstream-cloud.org/ui/cli/overview/).
 
+## Check on action runner usage
+
+Use ansible to download usage data::
+
+    ansible-playbook fetch-activity-logs.yaml -i hosts.yaml
+
+Then, run the `usage-details.ipynb` notebook in Jupyter.
+
 ## Style
 
 Use `pre-commit` to check for code style and formatting.
