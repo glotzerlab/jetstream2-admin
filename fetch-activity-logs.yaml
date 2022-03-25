@@ -1,0 +1,9 @@
+- name: Update action runners.
+  hosts: action_runners
+
+  tasks:
+    - name: Fetch activity logs
+      ansible.builtin.fetch:
+        src: active-2022.log
+        dest: activity-logs/{{ inventory_hostname }}
+        flat: yes
