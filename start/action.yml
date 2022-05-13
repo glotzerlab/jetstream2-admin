@@ -10,17 +10,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Dump GitHub context
-      id: github_context_step
-      run: echo '${{ toJSON(github) }}'
-      shell: bash
-    - name: Dump job context
-      run: echo '${{ toJSON(job) }}'
-      shell: bash
     - uses: actions/cache@v3.0.2
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ runner.os }}-pip-v1.0.0
         restore-keys: |
           ${{ runner.os }}-pip-
     - name: Install openstack
