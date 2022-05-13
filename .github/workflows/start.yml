@@ -3,41 +3,15 @@ name: Start action runners
 on:
   pull_request:
 
-  workflow_call:
-    secrets:
-      OS_APPLICATION_CREDENTIAL_ID:
-        required: true
-      OS_APPLICATION_CREDENTIAL_SECRET:
-        required: true
-
 jobs:
   start:
+    name: Test start composite action
     runs-on: ubuntu-latest
 
     steps:
-      - name: Dump GitHub context
-        id: github_context_step
-        run: echo '${{ toJSON(github) }}'
-      - name: Dump job context
-        run: echo '${{ toJSON(job) }}'
       - uses: actions/checkout@v3.0.2
-        with:
-          path: code
-      - uses: actions/cache@v3.0.2
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-      - name: Install openstack
-        run: python3 -m pip install -r code/requirements.txt
       - name: Start action runners
-        run: python3 code/start-action-runners.py
-        env:
+        uses: ./start
+        with:
           OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
           OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
-          OS_AUTH_TYPE: v3applicationcredential
-          OS_AUTH_URL: https://js2.jetstream-cloud.org:5000/v3/
-          OS_IDENTITY_API_VERSION: 3
-          OS_REGION_NAME: "IU"
-          OS_INTERFACE: public
