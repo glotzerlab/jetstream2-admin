@@ -1,25 +1,29 @@
-name: Shelve powered off instances
+name: Start action runners
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 on:
-  schedule:
-      - cron:  '4 * * * *'
+  pull_request:
 
-  workflow_dispatch:
+  workflow_call:
+    secrets:
+      OS_APPLICATION_CREDENTIAL_ID:
+        required: true
+      OS_APPLICATION_CREDENTIAL_SECRET:
+        required: true
 
 jobs:
-  shelve_action_runners:
-    name: Shelve action runners
+  start_action_runners:
+    name: Start action runners
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3.0.2
         with:
           path: code
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v3.0.2
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -27,8 +31,8 @@ jobs:
             ${{ runner.os }}-pip-
       - name: Install openstack
         run: python3 -m pip install -r code/requirements.txt
-      - name: Shelve action runners
-        run: python3 code/shelve-action-runners.py
+      - name: Start action runners
+        run: python3 code/start-action-runners.py
         env:
           OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
           OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
