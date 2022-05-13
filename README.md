@@ -1,6 +1,24 @@
 # jetstream2 administration scripts
 
-Use these scripts to administer the jetstream2 VMs.
+Use these scripts to administer the jetstream2 VMs. They provide resources to GitHub Actions to
+perform expensive build and test options more quickly.
+
+## Using the runnings in GitHub Actions
+
+Use the runner `[self-hosted,jetstream2,CPU]` to select these runners for GitHub Actions jobs.
+
+The VMs shutdown automatically after a period of inactivity. Start the runners as part of the
+workflow with this job:
+
+```
+    steps:
+      - uses: glotzerlab/jetstream2-admin/start@v1.0.0
+        with:
+          OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
+          OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
+```
+
+## To adminster the VMs
 
 * Create and manage VMs at: https://jetstream2.exosphere.app/exosphere/home
 * Add VMs to the inventory in `hosts.yaml`.
@@ -41,4 +59,4 @@ Use `pre-commit` to check for code style and formatting.
 
 ## License
 
-The jetstream2 administration scripts are available under the [3-clause BSD license](LICENSE).
+Tihe jetstream2 administration scripts are available under the [3-clause BSD license](LICENSE).
