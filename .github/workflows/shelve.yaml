@@ -26,7 +26,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
       - name: Install openstack
-        run: python3 -m pip install -r code/requirements.txt
+        run: python3 -m pip install -r code/start/requirements.txt
       - name: Shelve action runners
         run: python3 code/shelve-action-runners.py
         env:
