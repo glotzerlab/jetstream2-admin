@@ -9,7 +9,7 @@ updates:
       separator: "-"
 
   - package-ecosystem: "pip"
-    directory: "/"
+    directory: "/start"
     target-branch: trunk
     schedule:
       interval: "monthly"
