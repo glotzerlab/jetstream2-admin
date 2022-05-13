@@ -11,8 +11,7 @@ on:
         required: true
 
 jobs:
-  start_action_runners:
-    name: Start action runners
+  start:
     runs-on: ubuntu-latest
 
     steps:
