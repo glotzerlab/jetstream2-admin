@@ -1,0 +1,17 @@
+name: Start action runners
+
+on:
+  pull_request:
+
+jobs:
+  start:
+    name: Test start composite action
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3.0.2
+      - name: Start action runners
+        uses: ./start
+        with:
+          OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
+          OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}

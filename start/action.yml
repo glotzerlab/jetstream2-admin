@@ -1,0 +1,32 @@
+name: Start action runners
+description: Start action runners
+
+inputs:
+  OS_APPLICATION_CREDENTIAL_ID:
+    required: true
+  OS_APPLICATION_CREDENTIAL_SECRET:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/cache@v3.0.2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-v1.0.0
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: Install openstack
+      run: python3 -m pip install -r ${{ github.action_path }}/requirements.txt
+      shell: bash
+    - name: Start action runners
+      run: python3 ${{ github.action_path }}/start-action-runners.py
+      shell: bash
+      env:
+        OS_APPLICATION_CREDENTIAL_ID: ${{ inputs.OS_APPLICATION_CREDENTIAL_ID }}
+        OS_APPLICATION_CREDENTIAL_SECRET: ${{ inputs.OS_APPLICATION_CREDENTIAL_SECRET }}
+        OS_AUTH_TYPE: v3applicationcredential
+        OS_AUTH_URL: https://js2.jetstream-cloud.org:5000/v3/
+        OS_IDENTITY_API_VERSION: 3
+        OS_REGION_NAME: "IU"
+        OS_INTERFACE: public
