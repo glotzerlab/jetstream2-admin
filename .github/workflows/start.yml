@@ -1,6 +1,12 @@
 name: Start action runners
 
 on:
+  # GitHub will remove action runners if they are offline for more than 14 days.
+  # https://github.blog/changelog/2022-08-03-github-actions-remove-offline-self-hosted-runners/
+  # Start them once every week to prevent.
+  schedule:
+      - cron:  '0 13 * * 1'
+
   pull_request:
 
 jobs:
