@@ -1,1 +1,1 @@
-openstacksdk == 0.100.0
+openstacksdk == 0.101.0
