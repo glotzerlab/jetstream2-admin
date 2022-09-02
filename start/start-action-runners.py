@@ -53,7 +53,7 @@ def bring_runners_online(connection):
                     print(f'::warning:: Failed to start server {server.name}:',
                           str(e))
 
-            elif server.status == 'ACTIVE':
+            elif server.status == 'ACTIVE' or server.status == 'VERIFY_RESIZE':
                 active_runners += 1
 
     if total_runners == active_runners:
