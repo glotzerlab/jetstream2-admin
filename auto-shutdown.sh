@@ -46,6 +46,5 @@ if [ "$num_recently_modified" -eq "0" ]; then
     # shut down
     echo "... shut down"
     /usr/sbin/shutdown now -h
+    echo ""
 fi
-
-echo ""
