@@ -8,7 +8,7 @@ uptime=${uptime%%.*}
 num_users=$(who | wc -l)
 
 # Ensure that the system remains up after boot.
-if (( $uptime < 3600 )); then
+if (( $uptime < 1800 )); then
     echo $(date): Skipping auto-shutdown, system up for $uptime seconds.
     exit 0
 fi
@@ -19,8 +19,16 @@ if (( $num_users > 0 )); then
     exit 0
 fi
 
-num_recently_modified=$(find /home/exouser/actions-runner/_diag -name "Worker*" -mmin -60 | wc -l)
-echo $(date): $num_recently_modified recently modified files in _diag
+runner_id=$(hostname | cut -d\- -f4)
+recent_minutes=30
+
+# keep some runners on for longer times to provide availability for pull reqeusts from forks
+if (( $runner_id < 1 )); then
+    recent_minutes=480
+fi
+
+num_recently_modified=$(find /home/exouser/actions-runner/_diag -name "Worker*" -mmin -${recent_minutes} | wc -l)
+echo $(date): $num_recently_modified files in _diag were modified in the last ${recent_minutes} minutes
 
 if [ "$num_recently_modified" -eq "0" ]; then
     echo $(date): Cleaning up and shutting down.
