@@ -24,7 +24,7 @@ runs:
       run: python3 -m pip install -r ${{ github.action_path }}/requirements.txt
       shell: bash
     - name: Start action runners
-      run: python3 ${{ github.action_path }}/start-action-runners.py ${{ input.number }}
+      run: python3 ${{ github.action_path }}/start-action-runners.py ${{ inputs.number }}
       shell: bash
       env:
         OS_APPLICATION_CREDENTIAL_ID: ${{ inputs.OS_APPLICATION_CREDENTIAL_ID }}
