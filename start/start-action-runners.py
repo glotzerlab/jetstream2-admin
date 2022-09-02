@@ -2,8 +2,9 @@
 # Part of the Glotzerlab jetstream2 administration scripts, released under the
 # BSD 3-Clause License.
 
-"""Start all the actions runner instances in jetstream2."""
+"""Start actions runner instances in jetstream2."""
 
+import argparse
 import openstack
 import sys
 import time
@@ -12,11 +13,11 @@ NUM_ATTEMPTS = 8
 TIME_BETWEEN_ATTEMPTS = 20
 
 
-def bring_runners_online(connection):
-    """Bring all actions-runner servers online.
+def bring_runners_online(connection, N):
+    """Bring N actions-runner servers online.
 
     Returns:
-        True when all actions-runner servers are online, False otherwise.
+        True when N (or all) actions-runner servers are online, False otherwise.
     """
     try:
         servers = list(connection.compute.servers())
@@ -27,8 +28,13 @@ def bring_runners_online(connection):
     total_runners = 0
     active_runners = 0
 
+    servers.sort(key=lambda server: server.name)
+
     for server in servers:
         if server.name.startswith('actions-runner'):
+            if N > 0 and total_runners >= N:
+                break
+
             total_runners += 1
 
             print(
@@ -57,7 +63,7 @@ def bring_runners_online(connection):
                 active_runners += 1
 
     if total_runners == active_runners:
-        print("Success: All actions-runner servers are active.")
+        print(f"Success: {total_runners} actions-runner servers are active.")
 
     sys.stdout.flush()
 
@@ -65,6 +71,16 @@ def bring_runners_online(connection):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Start actions runner instances in jetstream2.')
+    parser.add_argument('N',
+                        type=int,
+                        nargs='?',
+                        default=-1,
+                        help='Number of instances to start (-1 starts all).')
+
+    args = parser.parse_args()
+
     # catch errors and return success so that this script doesn't stop the whole
     # actions job
     try:
@@ -75,7 +91,8 @@ if __name__ == '__main__':
 
     # attempt to bring the servers online several times before returning
     attempts = 0
-    while (not bring_runners_online(connection) and attempts < NUM_ATTEMPTS):
+    while (not bring_runners_online(connection, args.N)
+           and attempts < NUM_ATTEMPTS):
         attempts += 1
         print(f'Waiting {TIME_BETWEEN_ATTEMPTS} seconds...', flush=True)
         time.sleep(TIME_BETWEEN_ATTEMPTS)
