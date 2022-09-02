@@ -18,6 +18,17 @@ workflow with this job:
           OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
 ```
 
+Optionally request only a certain number of runners. Use this when your GitHub Actions workflow
+only runs a small number of jobs:
+```
+    steps:
+      - uses: glotzerlab/jetstream2-admin/start@v1.0.0
+        with:
+          OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
+          OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
+          number: 1
+```
+
 ## To adminster the VMs
 
 * Create and manage VMs at: https://jetstream2.exosphere.app/exosphere/home
