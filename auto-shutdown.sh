@@ -20,11 +20,11 @@ if (( $num_users > 0 )); then
 fi
 
 runner_id=$(hostname | cut -d\- -f4)
-recent_minutes=30
+recent_minutes=120
 
 # keep some runners on for longer times to provide availability for pull reqeusts from forks
 if (( $runner_id < 1 )); then
-    recent_minutes=480
+    recent_minutes=720
 fi
 
 num_recently_modified=$(find /home/exouser/actions-runner/_diag -name "Worker*" -mmin -${recent_minutes} | wc -l)
