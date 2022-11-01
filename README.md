@@ -12,7 +12,7 @@ workflow with this job:
 
 ```
     steps:
-      - uses: glotzerlab/jetstream2-admin/start@v1.0.0
+      - uses: glotzerlab/jetstream2-admin/start@v1.0.1
         with:
           OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
           OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
@@ -22,7 +22,7 @@ Optionally request only a certain number of runners. Use this when your GitHub A
 only runs a small number of jobs:
 ```
     steps:
-      - uses: glotzerlab/jetstream2-admin/start@v1.0.0
+      - uses: glotzerlab/jetstream2-admin/start@v1.0.1
         with:
           OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
           OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
