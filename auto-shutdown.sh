@@ -39,6 +39,7 @@ if [ "$num_recently_modified" -eq "0" ]; then
     # clear up disk space
     echo "... delete log files."
     find /home/exouser/actions-runner/_diag/ -name "*.log" -delete
+    journalctl --vacuum-size=200M
 
     echo "... prune docker images."
     docker system prune -a -f

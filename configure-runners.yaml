@@ -83,3 +83,16 @@
             minute: "2,32"
             job: /home/exouser/log-activity.sh
             user: exouser
+        - name: Copy free space script
+          ansible.builtin.copy:
+            src: manage-free-space.sh
+            dest: /home/exouser/manage-free-space.sh
+            owner: exouser
+            mode: '0755'
+        - name: Configure manage-free-space cron job
+          ansible.builtin.cron:
+            name: manage-free-space
+            minute: "*/10"
+            job: "/home/exouser/manage-free-space.sh >> /home/exouser/manage-free-space.log 2>&1"
+            user: root
+          become: yes
