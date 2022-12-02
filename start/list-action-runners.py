@@ -8,8 +8,7 @@ import openstack
 
 
 def list_runners(connection):
-    """List runners by their state and id.
-    """
+    """List runners by their state and id."""
     try:
         servers = list(connection.compute.servers())
     except Exception as e:

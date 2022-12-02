@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: 'v4.1.0'
+  rev: 'v4.4.0'
   hooks:
   - id: end-of-file-fixer
     exclude_types: [svg]
@@ -28,15 +28,15 @@ repos:
   hooks:
   - id: yapf
 - repo: https://github.com/PyCQA/flake8
-  rev: '4.0.1'
+  rev: '6.0.0'
   hooks:
   - id: flake8
     additional_dependencies:
-    - pep8-naming==0.12.1
+    - pep8-naming==0.13.2
     - pydocstyle==6.1.1
     - flake8-docstrings==1.6.0
-    - flake8-rst-docstrings==0.2.3
+    - flake8-rst-docstrings==0.3.0
 - repo: https://github.com/kynan/nbstripout
-  rev: 0.5.0
+  rev: 0.6.1
   hooks:
     - id: nbstripout
