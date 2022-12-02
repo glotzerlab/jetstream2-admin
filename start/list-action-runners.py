@@ -20,9 +20,7 @@ def list_runners(connection):
 
     for server in servers:
         if server.name.startswith('actions-runner'):
-            print(
-                f'{server.id} is {server.status}({server.task_state}).'
-            )
+            print(f'{server.id} is {server.status}({server.task_state}).')
 
 
 if __name__ == '__main__':

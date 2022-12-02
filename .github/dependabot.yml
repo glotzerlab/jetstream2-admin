@@ -15,4 +15,3 @@ updates:
       interval: "monthly"
     pull-request-branch-name:
       separator: "-"
-
