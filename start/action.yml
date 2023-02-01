@@ -17,7 +17,7 @@ runs:
     - uses: actions/cache@v3.2.4
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-v1.2.0
+        key: ${{ runner.os }}-pip-v1.2.1
         restore-keys: |
           ${{ runner.os }}-pip-
     - name: Install openstack
