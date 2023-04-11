@@ -22,9 +22,9 @@ jobs:
       - uses: actions/cache@v3.3.1
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: jetstream2-admin-${{ runner.os }}-pip-v1.2.1-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-pip-
+            jetstream2-admin-${{ runner.os }}-pip-
       - name: Install openstack
         run: python3 -m pip install -r code/start/requirements.txt
       - name: Shelve action runners
