@@ -1,4 +1,4 @@
-# Copyright (c) 2022 The Regents of the University of Michigan.
+# Copyright (c) 2022-2023 The Regents of the University of Michigan.
 # Part of the Glotzerlab jetstream2 administration scripts, released under the
 # BSD 3-Clause License.
 
