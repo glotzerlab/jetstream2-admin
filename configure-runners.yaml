@@ -2,7 +2,7 @@
   hosts: action_runners
   vars:
     # TODO: determine latest actions version automatically
-    actions_version: 2.288.1
+    actions_version: 2.309.0
     actions_path: /home/exouser/actions-runner
   vars_prompt:
     - name: token
