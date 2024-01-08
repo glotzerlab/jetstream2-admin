@@ -14,7 +14,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/cache@v3.3.1
+    - uses: actions/cache@v3.3.2
       with:
         path: ~/.cache/pip
         key: jetstream2-admin-${{ runner.os }}-pip-v1.2.2-${{ hashFiles('**/requirements.txt') }}

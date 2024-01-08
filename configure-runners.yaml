@@ -2,7 +2,7 @@
   hosts: action_runners
   vars:
     # TODO: determine latest actions version automatically
-    actions_version: 2.309.0
+    actions_version: 2.311.0
     actions_path: /home/exouser/actions-runner
   vars_prompt:
     - name: token
@@ -23,7 +23,6 @@
       ansible.builtin.stat:
         path: "{{ actions_path }}"
       register: check_path
-
     - name: Install the Github Actions runner
       when: not check_path.stat.exists
       block:
