@@ -1,5 +1,13 @@
 all:
   children:
+    action_runner_managers:
+      vars:
+        ansible_user: exouser
+
+      hosts:
+        actions-runner-manager:
+          ansible_host: 149.165.175.133
+
     action_runners:
       vars:
         ansible_user: exouser

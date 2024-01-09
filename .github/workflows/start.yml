@@ -1,10 +1,6 @@
 name: Start action runners
 
 on:
-  # Start the runners every weekday.
-  schedule:
-      - cron:  '0 13 * * 1-5'
-
   pull_request:
 
   workflow_dispatch:

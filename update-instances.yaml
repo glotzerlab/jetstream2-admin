@@ -1,5 +1,8 @@
 - name: Update action runners.
   hosts: all
+  vars:
+    miniforge_path: /home/exouser/miniforge3
+    home: /home/exouser
 
   tasks:
     - name: Update apt packages
@@ -9,3 +12,15 @@
         cache_valid_time: 3600
         upgrade: yes
         autoclean: yes
+
+    - name: Update miniforge
+      when: "'action_runner_managers' in group_names"
+      ansible.builtin.command: "{{ miniforge_path }}/bin/mamba update --all -y"
+
+    - name: Update jetstream2-admin clone
+      when: "'action_runner_managers' in group_names"
+      ansible.builtin.git:
+        repo: "https://github.com/glotzerlab/jetstream2-admin.git"
+        dest: "{{ home }}/jetstream2-admin"
+        version: trunk
+        clone: no

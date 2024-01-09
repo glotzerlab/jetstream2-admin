@@ -1,0 +1,63 @@
+- name: Configure action runner manager.
+  hosts: action_runner_managers
+  vars:
+    miniforge_path: /home/exouser/miniforge3
+    home: /home/exouser
+    python_version: "3.11"
+
+  tasks:
+    - name: Check if miniforge exists
+      ansible.builtin.stat:
+        path: "{{ miniforge_path }}"
+      register: check_path
+
+    - name: Install miniforge
+      when: not check_path.stat.exists
+      block:
+        - name: Download miniforge
+          ansible.builtin.get_url:
+            url: https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+            dest: "{{ home }}"
+        - name: Install miniforge
+          ansible.builtin.command: "bash {{ home }}/Miniforge3-Linux-x86_64.sh -b -p {{ miniforge_path }}"
+        - name: Removing miniforge download
+          ansible.builtin.file:
+            path: "{{ home }}/Miniforge3-Linux-x86_64.sh"
+            state: absent
+      rescue:
+        - name: Error, removing miniforge directory
+          ansible.builtin.file:
+            path: "{{ miniforge_path }}"
+            state: absent
+        - name: Error, removing miniforge file
+          ansible.builtin.file:
+            path: "{{ home }}/Miniforge3-Linux-x86_64.sh"
+            state: absent
+
+    - name: Install the latest python
+      ansible.builtin.command: "{{ miniforge_path }}/bin/mamba install python={{ python_version }} -y"
+
+    - name: Install openstack
+      ansible.builtin.command: "{{ miniforge_path }}/bin/mamba install openstacksdk -y"
+
+    - name: Clone jetstream2-admin
+      ansible.builtin.git:
+        repo: "https://github.com/glotzerlab/jetstream2-admin.git"
+        dest: "{{ home }}/jetstream2-admin"
+        version: trunk
+
+    - name: Configure shelve action runners job
+      ansible.builtin.cron:
+        name: shelve-action-runners
+        minute: "4"
+        job: '/usr/bin/bash -c "date && source {{ home }}/openrc-credentials.sh && {{ miniforge_path }}/bin/python3 {{ home }}/jetstream2-admin/shelve-action-runners.py && echo" 2>&1 >> {{ home }}/shelve-action-runners.log'
+        user: exouser
+
+    - name: Configure start action runners job
+      ansible.builtin.cron:
+        name: start-action-runners
+        minute: "0"
+        hour: "13"
+        weekday: "1-5"
+        job: '/usr/bin/bash -c "date && source {{ home }}/openrc-credentials.sh && {{ miniforge_path }}/bin/python3 {{ home }}/jetstream2-admin/start/start-action-runners.py && echo" 2>&1 >> {{ home }}/start-action-runners.log'
+        user: exouser
