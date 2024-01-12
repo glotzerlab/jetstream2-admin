@@ -4,6 +4,6 @@
   tasks:
     - name: Fetch activity logs
       ansible.builtin.fetch:
-        src: active-2023.log
+        src: active-2024.log
         dest: activity-logs/{{ inventory_hostname }}
         flat: yes
