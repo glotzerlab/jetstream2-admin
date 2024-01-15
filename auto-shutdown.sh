@@ -6,6 +6,7 @@ uptime=$(</proc/uptime)
 uptime=${uptime%%.*}
 
 num_users=$(who | wc -l)
+num_notty_logins=$(pgrep -ai sshd | grep "@notty" | wc -l)
 
 # Ensure that the system remains up after boot.
 if (( $uptime < 1800 )); then
@@ -16,6 +17,11 @@ fi
 # Don't shut down when users are logged in.
 if (( $num_users > 0 )); then
     echo $(date): Skipping auto-shutdown, $num_users users logged in.
+    exit 0
+fi
+
+if (( $num_notty_logins > 0 )); then
+    echo $(date): Skipping auto-shutdown, $num_notty_logins notty connections.
     exit 0
 fi
 
