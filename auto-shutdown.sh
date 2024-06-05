@@ -26,7 +26,7 @@ if (( $num_notty_logins > 0 )); then
 fi
 
 runner_id=$(hostname | cut -d\- -f4)
-recent_minutes=60
+recent_minutes=120
 
 num_recently_modified=$(find /home/exouser/actions-runner/_diag -name "Worker*" -mmin -${recent_minutes} | wc -l)
 echo $(date): $num_recently_modified files in _diag were modified in the last ${recent_minutes} minutes
