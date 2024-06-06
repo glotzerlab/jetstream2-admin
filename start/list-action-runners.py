@@ -12,16 +12,17 @@ def list_runners(connection):
     try:
         servers = list(connection.compute.servers())
     except Exception as e:
-        print('::warning:: Failed to enumerate servers:', str(e))
+        print("::warning:: Failed to enumerate servers:", str(e))
         return False
 
     servers.sort(key=lambda server: server.name)
 
     for server in servers:
-        if server.name.startswith('actions-runner'):
-            print(f'{server.id} is {server.status}({server.task_state}).')
+        if server.name.startswith("actions-runner"):
+            print(f"{server.id} is {server.status}({server.task_state}).")
+    return None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     connection = openstack.connect()
     list_runners(connection)
