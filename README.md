@@ -5,6 +5,8 @@ perform expensive build and test options more quickly.
 
 ## Using the runnings in GitHub Actions
 
+# TODO: update this
+
 Use the runner `[self-hosted,jetstream2,CPU]` to select these runners for GitHub Actions jobs.
 
 The VMs shutdown automatically after a period of inactivity. Start the runners as part of the
