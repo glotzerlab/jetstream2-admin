@@ -3,9 +3,7 @@
 Use these scripts to administer the jetstream2 VMs. They provide resources to GitHub Actions to
 perform expensive build and test options more quickly.
 
-## Using the runnings in GitHub Actions
-
-# TODO: update this
+## Using the runners in GitHub Actions
 
 Use the runner `[self-hosted,jetstream2,CPU]` to select these runners for GitHub Actions jobs.
 
@@ -13,25 +11,23 @@ The VMs shutdown automatically after a period of inactivity. Start the runners a
 workflow with this job:
 
 ```
-    steps:
-      - uses: glotzerlab/jetstream2-admin/start@v1.2.2
-        with:
-          OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
-          OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
+  start_action_runners:
+    name: Start
+    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@<sha of latest tag> # v1.2.5
+    secrets: inherit
 ```
 
-Optionally request only a certain number of runners. Use this when your GitHub Actions workflow
-only runs a small number of jobs:
+Optionally request only a certain number of runners:
 ```
-    steps:
-      - uses: glotzerlab/jetstream2-admin/start@v1.2.2
-        with:
-          OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
-          OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}
-          number: 1
+  start_action_runners:
+    name: Start
+    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@<sha of latest tag> # v1.2.5
+    secrets: inherit
+    with:
+      number: 1
 ```
 
-## To adminster the VMs
+## To administer the VMs
 
 * Create and manage VMs at: https://jetstream2.exosphere.app/exosphere/home
 * Add VMs to the inventory in `hosts.yaml`.
