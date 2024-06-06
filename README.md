@@ -13,7 +13,7 @@ workflow with this job:
 ```
   start_action_runners:
     name: Start
-    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@<sha of latest tag> # v1.2.5
+    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@<sha of latest tag> # v1.3.0
     secrets: inherit
 ```
 
@@ -21,7 +21,7 @@ Optionally request only a certain number of runners:
 ```
   start_action_runners:
     name: Start
-    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@<sha of latest tag> # v1.2.5
+    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@<sha of latest tag> # v1.3.0
     secrets: inherit
     with:
       number: 1
