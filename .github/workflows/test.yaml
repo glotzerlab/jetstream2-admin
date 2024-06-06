@@ -1,0 +1,22 @@
+name: Test
+
+on:
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  start_workflow:
+    name: Start
+    uses: ./.github/workflows/start.yaml
+    secrets: inherit
+
+  check_output:
+    name: Check output
+    needs: start_workflow
+    # runs-on: ubuntu-latest
+    runs-on: ${{ needs.start_workflow.outputs.exit_code == 3 && 'ubuntu-20.04' || 'ubuntu-24.04' }}
+    container: null
+
+    steps:
+    - run: "echo Exit code: ${{ needs.start_workflow.outputs.exit_code }}"

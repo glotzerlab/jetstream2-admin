@@ -67,7 +67,7 @@ def bring_runners_online(connection, N):
 
     sys.stdout.flush()
 
-    return total_runners == active_runners
+    return (total_runners == active_runners, active_runners)
 
 
 if __name__ == '__main__':
@@ -87,13 +87,20 @@ if __name__ == '__main__':
         connection = openstack.connect()
     except Exception as e:
         print('::warning:: Failed to connect to cloud:', str(e))
-        sys.exit(0)
+        sys.exit(1)
 
     # attempt to bring the servers online several times before returning
     attempts = 0
-    while (not bring_runners_online(connection, args.N)
-           and attempts < NUM_ATTEMPTS):
+    done, active_runners = bring_runners_online(connection, args.N)
+    while (not done and attempts < NUM_ATTEMPTS):
         attempts += 1
         print(f'Waiting {TIME_BETWEEN_ATTEMPTS} seconds...', flush=True)
         time.sleep(TIME_BETWEEN_ATTEMPTS)
         print('', flush=True)
+        done, active_runners = bring_runners_online(connection, args.N)
+
+    if active_runners == 0:
+        sys.exit(2)
+
+    # testing
+    sys.exit(3)
