@@ -112,5 +112,4 @@ if __name__ == "__main__":
         done, active_runners = bring_runners_online(connection, args.N)
 
     # Calling applications can redirect stdout to determine the number of active runners.
-    # print(active_runners)
-    print(0)
+    print(active_runners)
