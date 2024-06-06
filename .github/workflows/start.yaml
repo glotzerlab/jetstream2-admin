@@ -16,16 +16,16 @@ on:
         required: true
 
     outputs:
-      exit_code:
-        description: "The exit code from start.py"
-        value: ${{ jobs.action_runners.outputs.exit_code }}
+      active:
+        description: "The number of active runners."
+        value: ${{ jobs.action_runners.outputs.active }}
 
 jobs:
   action_runners:
     name: action runners
     runs-on: ubuntu-latest
     outputs:
-      exit_code: ${{ steps.start.outputs.exit_code }}
+      active: ${{ steps.start.outputs.active }}
     steps:
     - name: Checkout
       uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6  
@@ -43,9 +43,8 @@ jobs:
         lockfile: ".github/workflows/requirements.txt"
     - id: start
       name: Start action runners
-      continue-on-error: true
       run: |
-        python3 start/start-action-runners.py ${{ inputs.number }} || echo "exit_code=$?" >> $GITHUB_OUTPUT
+        echo "active=$(python3 start/start-action-runners.py ${{ inputs.number }})" >> $GITHUB_OUTPUT
       env:
         OS_APPLICATION_CREDENTIAL_ID: ${{ secrets.OS_APPLICATION_CREDENTIAL_ID }}
         OS_APPLICATION_CREDENTIAL_SECRET: ${{ secrets.OS_APPLICATION_CREDENTIAL_SECRET }}

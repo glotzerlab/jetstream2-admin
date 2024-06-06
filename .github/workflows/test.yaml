@@ -9,14 +9,21 @@ jobs:
   start_workflow:
     name: Start
     uses: ./.github/workflows/start.yaml
+    with:
+      number: 1
     secrets: inherit
 
   check_output:
     name: Check output
     needs: start_workflow
-    # runs-on: ubuntu-latest
-    runs-on: ${{ needs.start_workflow.outputs.exit_code == 3 && 'ubuntu-20.04' || 'ubuntu-24.04' }}
-    container: null
+    runs-on: ubuntu-latest
 
     steps:
-    - run: "echo Exit code: ${{ needs.start_workflow.outputs.exit_code }}"
+    - name: "Check active runners"
+      run: |
+        echo Number of active runners: ${{ needs.start_workflow.outputs.active }}
+        if [[ "${{ needs.start_workflow.outputs.active }}" != "1" ]]
+        then
+          echo "::error:: The action runner failed to start."
+          exit 1
+        fi
