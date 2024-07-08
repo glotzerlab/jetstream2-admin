@@ -11,9 +11,9 @@ on:
 
     secrets:
       OS_APPLICATION_CREDENTIAL_ID:
-        required: true
+        required: false
       OS_APPLICATION_CREDENTIAL_SECRET:
-        required: true
+        required: false
 
     outputs:
       active:
