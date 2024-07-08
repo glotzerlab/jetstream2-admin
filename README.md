@@ -13,7 +13,7 @@ workflow with this job:
 ```
   start_action_runners:
     name: Start
-    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@c89b62aa89f7886318edb166bc0500cfc658f24f # v1.3.0
+    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@98f840ba341f72bf412100f2180d38c06e792b84 # v1.3.0
     secrets: inherit
 ```
 
@@ -21,7 +21,7 @@ Optionally request only a certain number of runners:
 ```
   start_action_runners:
     name: Start
-    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@c89b62aa89f7886318edb166bc0500cfc658f24f # v1.3.0
+    uses: glotzerlab/jetstream2-admin/.github/workflows/start.yaml@98f840ba341f72bf412100f2180d38c06e792b84 # v1.3.0
     secrets: inherit
     with:
       number: 1
@@ -68,4 +68,4 @@ Use `pre-commit` to check for code style and formatting.
 
 ## License
 
-Tihe jetstream2 administration scripts are available under the [3-clause BSD license](LICENSE).
+The jetstream2 administration scripts are available under the [3-clause BSD license](LICENSE).
