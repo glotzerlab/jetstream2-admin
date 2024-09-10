@@ -56,7 +56,5 @@ stevedore==5.2.0
     # via
     #   dogpile-cache
     #   keystoneauth1
-typing-extensions==4.12.1
-    # via dogpile-cache
-urllib3==2.2.1
+urllib3==2.2.2
     # via requests
