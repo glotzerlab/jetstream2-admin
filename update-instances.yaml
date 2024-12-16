@@ -16,6 +16,8 @@
     - name: Update miniforge
       when: "'action_runner_managers' in group_names"
       ansible.builtin.command: "{{ miniforge_path }}/bin/mamba update --all -y"
+      environment:
+        MAMBA_ROOT_PREFIX: /home/exouser/miniforge3
 
     - name: Update jetstream2-admin clone
       when: "'action_runner_managers' in group_names"
