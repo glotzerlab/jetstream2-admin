@@ -28,9 +28,7 @@ jsonpointer==2.4
     # via jsonpatch
 keystoneauth1==5.6.0
     # via openstacksdk
-netifaces==0.11.0
-    # via openstacksdk
-openstacksdk==4.1.0
+openstacksdk==4.2.0
     # via -r requirements.in
 os-service-types==1.7.0
     # via
@@ -43,6 +41,8 @@ pbr==6.0.0
     #   os-service-types
     #   stevedore
 platformdirs==4.2.2
+    # via openstacksdk
+psutil==6.1.1
     # via openstacksdk
 pycparser==2.22
     # via cffi
