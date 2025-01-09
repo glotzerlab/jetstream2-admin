@@ -14,8 +14,10 @@ NUM_ATTEMPTS = 8
 TIME_BETWEEN_ATTEMPTS = 20
 
 
-def bring_runners_online(connection, N):
+def bring_runners_online(connection, N, wait):
     """Bring N actions-runner servers online.
+
+    When `wait` is False, assume that runners are available after requesting a start.
 
     Returns:
         (done, n_active): `done` is `True` when N (or all) actions-runner servers are online,
@@ -48,6 +50,8 @@ def bring_runners_online(connection, N):
 
                 try:
                     connection.compute.unshelve_server(server)
+                    if not wait:
+                        active_runners += 1
                 except Exception as e:
                     print(
                         f"::warning:: Failed to unshelve {server.name}:",
@@ -60,6 +64,8 @@ def bring_runners_online(connection, N):
 
                 try:
                     connection.compute.start_server(server)
+                    if not wait:
+                        active_runners += 1
                 except Exception as e:
                     print(
                         f"::warning:: Failed to start server {server.name}:",
@@ -70,7 +76,10 @@ def bring_runners_online(connection, N):
             elif server.status == "ACTIVE":
                 active_runners += 1
 
-    if total_runners == active_runners:
+            elif server.status == "STARTING":
+                active_runners += 1
+
+    if active_runners >= total_runners:
         print(
             f"Success: {total_runners} actions-runner servers are active.",
             file=sys.stderr,
@@ -78,7 +87,7 @@ def bring_runners_online(connection, N):
 
     sys.stderr.flush()
 
-    return (total_runners == active_runners, active_runners)
+    return (active_runners >= total_runners, active_runners)
 
 
 if __name__ == "__main__":
@@ -90,6 +99,7 @@ if __name__ == "__main__":
         default=-1,
         help="Number of instances to start (-1 starts all).",
     )
+    parser.add_argument('--wait', action='store_true')
 
     args = parser.parse_args()
 
@@ -103,7 +113,7 @@ if __name__ == "__main__":
 
     # attempt to bring the servers online several times before returning
     attempts = 0
-    done, active_runners = bring_runners_online(connection, args.N)
+    done, active_runners = bring_runners_online(connection, args.N, args.wait)
     while not done and attempts < NUM_ATTEMPTS:
         attempts += 1
         print(f"Waiting {TIME_BETWEEN_ATTEMPTS} seconds...", flush=True, file=sys.stderr)
