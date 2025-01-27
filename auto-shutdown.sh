@@ -9,7 +9,7 @@ num_users=$(who | wc -l)
 num_notty_logins=$(pgrep -ai sshd | grep "@notty" | wc -l)
 
 # Ensure that the system remains up after boot.
-if (( $uptime < 7200 )); then
+if (( $uptime < 1800 )); then
     echo $(date): Skipping auto-shutdown, system up for $uptime seconds.
     exit 0
 fi

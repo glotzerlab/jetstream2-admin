@@ -119,7 +119,7 @@ if __name__ == "__main__":
         print(f"Waiting {TIME_BETWEEN_ATTEMPTS} seconds...", flush=True, file=sys.stderr)
         time.sleep(TIME_BETWEEN_ATTEMPTS)
         print("", flush=True, file=sys.stderr)
-        done, active_runners = bring_runners_online(connection, args.N)
+        done, active_runners = bring_runners_online(connection, args.N, args.wait)
 
     # Calling applications can redirect stdout to determine the number of active runners.
     print(active_runners)
