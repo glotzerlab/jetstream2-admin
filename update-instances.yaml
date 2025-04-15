@@ -8,6 +8,7 @@
     - name: Update apt packages
       become: yes
       ansible.builtin.apt:
+        allow_downgrade: true
         update_cache: true
         cache_valid_time: 3600
         upgrade: yes
