@@ -28,7 +28,7 @@ jsonpointer==3.0.0
     # via jsonpatch
 keystoneauth1==5.10.0
     # via openstacksdk
-openstacksdk==4.4.0
+openstacksdk==4.5.0
     # via -r requirements.in
 os-service-types==1.7.0
     # via
@@ -52,14 +52,13 @@ requests==2.32.3
     # via keystoneauth1
 requestsexceptions==1.4.0
     # via openstacksdk
-setuptools==78.1.0
-    # via pbr
 stevedore==5.4.1
     # via
     #   dogpile-cache
     #   keystoneauth1
 typing-extensions==4.13.2
     # via
+    #   dogpile-cache
     #   keystoneauth1
     #   openstacksdk
 urllib3==2.4.0
