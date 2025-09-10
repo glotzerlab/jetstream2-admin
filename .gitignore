@@ -1,2 +1,5 @@
 .ipynb_checkpoints
 activity-logs
+# pixi environments
+.pixi/*
+!.pixi/config.toml
