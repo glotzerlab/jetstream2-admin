@@ -1,0 +1,12 @@
+[workspace]
+authors = ["Joshua A. Anderson <joaander@umich.edu>"]
+channels = ["conda-forge"]
+name = "jetstream2-admin"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python-openstackclient = "*"
+ansible = "*"
