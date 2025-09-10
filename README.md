@@ -64,7 +64,7 @@ Then, run the `usage-details.ipynb` notebook in Jupyter.
 
 ## Style
 
-Use `pre-commit` to check for code style and formatting.
+Use `prek` to check for code style and formatting.
 
 ## License
 
