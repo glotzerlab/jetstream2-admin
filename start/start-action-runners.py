@@ -99,7 +99,7 @@ if __name__ == "__main__":
         default=-1,
         help="Number of instances to start (-1 starts all).",
     )
-    parser.add_argument('--wait', action='store_true')
+    parser.add_argument("--wait", action="store_true")
 
     args = parser.parse_args()
 
