@@ -30,19 +30,19 @@ all:
           vars:
             labels: CPU
           hosts:
-            actions-runner-cpu-0:
-              ansible_host: 149.165.159.48
             actions-runner-cpu-1:
-              ansible_host: 149.165.159.174
+              ansible_host: actions-runner-cpu-1-of-8.dmr140129.projects.jetstream-cloud.org
             actions-runner-cpu-2:
-              ansible_host: 149.165.159.243
+              ansible_host: actions-runner-cpu-2-of-8.dmr140129.projects.jetstream-cloud.org
             actions-runner-cpu-3:
-              ansible_host: 149.165.159.227
+              ansible_host: actions-runner-cpu-3-of-8.dmr140129.projects.jetstream-cloud.org
             actions-runner-cpu-4:
-              ansible_host: 149.165.159.34
+              ansible_host: actions-runner-cpu-4-of-8.dmr140129.projects.jetstream-cloud.org
+            actions-runner-cpu-5:
+              ansible_host: actions-runner-cpu-5-of-8.dmr140129.projects.jetstream-cloud.org
             actions-runner-cpu-6:
-              ansible_host: 149.165.159.58
+              ansible_host: actions-runner-cpu-6-of-8.dmr140129.projects.jetstream-cloud.org
+            actions-runner-cpu-7:
+              ansible_host: actions-runner-cpu-7-of-8.dmr140129.projects.jetstream-cloud.org
             actions-runner-cpu-8:
-              ansible_host: 149.165.159.161
-            actions-runner-cpu-9:
-              ansible_host: 149.165.159.120
+              ansible_host: actions-runner-cpu-8-of-8.dmr140129.projects.jetstream-cloud.org
