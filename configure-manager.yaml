@@ -49,7 +49,8 @@
     - name: Configure shelve action runners job
       ansible.builtin.cron:
         name: shelve-action-runners
-        minute: "10,25,40,55"
+        minute: "10"
+        hour: "0,6,12,18"
         job: '/usr/bin/bash -c "date && source {{ home }}/openrc-credentials.sh && {{ miniforge_path }}/bin/python3 {{ home }}/jetstream2-admin/shelve-action-runners.py && echo" 2>&1 >> {{ home }}/shelve-action-runners.log'
         user: exouser
 
