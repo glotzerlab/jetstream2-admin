@@ -38,7 +38,7 @@ jobs:
       with:
         python-version: "3.13"
     - name: Install openstack
-      uses: glotzerlab/workflows/setup-uv@576d32f9d5f9e5cbaa53c64e2363acb770c185a4 # testing
+      uses: glotzerlab/workflows/setup-uv@894d9678188a02b06560fdeb2b9ba98d016cd371 # 0.10.0
       with:
         lockfile: ".github/workflows/requirements.txt"
     - id: start
