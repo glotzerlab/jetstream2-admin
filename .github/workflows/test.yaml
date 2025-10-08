@@ -11,6 +11,7 @@ jobs:
     uses: ./.github/workflows/start.yaml
     with:
       number: 1
+      ref: ${{ github.head_ref }}
     secrets: inherit
 
   check_output:
