@@ -39,7 +39,7 @@ pbr==7.0.1
     #   keystoneauth1
     #   openstacksdk
     #   os-service-types
-platformdirs==4.4.0
+platformdirs==4.5.0
     # via openstacksdk
 psutil==7.1.0
     # via openstacksdk
