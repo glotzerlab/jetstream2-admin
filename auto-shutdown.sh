@@ -5,7 +5,7 @@
 uptime=$(</proc/uptime)
 uptime=${uptime%%.*}
 
-num_users=$(who | wc -l)
+num_users=$(who -m | wc -l)
 num_notty_logins=$(pgrep -ai sshd | grep "@notty" | wc -l)
 
 # Ensure that the system remains up after boot.
