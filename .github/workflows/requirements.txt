@@ -62,5 +62,5 @@ typing-extensions==4.15.0
     #   keystoneauth1
     #   openstacksdk
     #   os-service-types
-urllib3==2.6.0
+urllib3==2.6.1
     # via requests
