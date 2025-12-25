@@ -41,7 +41,7 @@ pbr==7.0.3
     #   os-service-types
 platformdirs==4.5.1
     # via openstacksdk
-psutil==7.1.3
+psutil==7.2.0
     # via openstacksdk
 pycparser==2.23
     # via cffi
@@ -62,5 +62,5 @@ typing-extensions==4.15.0
     #   keystoneauth1
     #   openstacksdk
     #   os-service-types
-urllib3==2.6.1
+urllib3==2.6.2
     # via requests
