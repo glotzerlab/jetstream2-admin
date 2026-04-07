@@ -42,8 +42,12 @@ if [ "$num_recently_modified" -eq "0" ]; then
     find /home/exouser/actions-runner/_diag/ -name "*.log" -delete
     journalctl --vacuum-size=200M
 
+    echo "... delete _work"
+    rm -rf /home/exouser/actions-runner/_work
+    rm -rf /home/exouser/actions-runner/.cargo
+
     echo "... prune docker images."
-    docker system prune -a -f
+    docker image prune -a -f
 
     # shut down
     echo "... shut down"
