@@ -55,8 +55,8 @@
             path: "{{ actions_path }}"
             state: absent
 
-    - name: Install rust
-      block:
+    # - name: Install rust
+    #   block:
         # - name: Initial install
         #   ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --target wasm32-unknown-unknown -y
         #   args:
@@ -67,20 +67,20 @@
         #   ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove 1.89.0
         # - name: Remove 1.90.0
         #   ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove 1.90.0
-        - name: Remove 1.91.0
-          ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove 1.91.0
+        # - name: Remove 1.91.0
+        #   ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove 1.91.0
         # - name: Remove 1.92.0
         #   ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove 1.92.0
         # - name: Remove 1.93.0
         #   ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove 1.93.0
-        - name: Remove 1.94.0
-          ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove 1.94.0
-        - name: Remove stable
-          ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove stable
-        - name: Remove rustup
-          ansible.builtin.file:
-            path: "/home/exouser/.cargo"
-            state: absent
+        # - name: Remove 1.94.0
+        #   ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove 1.94.0
+        # - name: Remove stable
+        #   ansible.builtin.command: /home/exouser/.cargo/bin/rustup toolchain remove stable
+        # - name: Remove rustup
+        #   ansible.builtin.file:
+        #     path: "/home/exouser/.cargo"
+        #     state: absent
 
 
     - name: Configure auto-shutdown and logger
