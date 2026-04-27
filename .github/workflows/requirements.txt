@@ -28,7 +28,7 @@ jsonpointer==3.1.1
     # via jsonpatch
 keystoneauth1==5.13.1
     # via openstacksdk
-openstacksdk==4.10.0
+openstacksdk==4.11.0
     # via -r .github/workflows/requirements.in
 os-service-types==1.8.2
     # via
@@ -49,8 +49,6 @@ pyyaml==6.0.3
     # via openstacksdk
 requests==2.33.1
     # via keystoneauth1
-requestsexceptions==1.4.0
-    # via openstacksdk
 setuptools==82.0.1
     # via pbr
 stevedore==5.7.0
