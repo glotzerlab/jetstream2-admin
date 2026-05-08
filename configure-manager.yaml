@@ -62,3 +62,23 @@
         weekday: "1-5"
         job: '/usr/bin/bash -c "date && source {{ home }}/openrc-credentials.sh && {{ miniforge_path }}/bin/python3 {{ home }}/jetstream2-admin/start/start-action-runners.py && echo" 2>&1 >> {{ home }}/start-action-runners.log'
         user: exouser
+
+    - name: Prevent Copy.Fail exploit
+      block:
+        - name: Disable algif
+          become: yes
+          ansible.builtin.copy:
+            src: disable-algif.conf
+            dest: /etc/modprobe.d/disable-algif.conf
+            owner: root
+            mode: '0644'
+
+    - name: Prevent Dirty Frag exploit
+      block:
+        - name: Disable dirty frag modules
+          become: yes
+          ansible.builtin.copy:
+            src: dirtyfrag.conf
+            dest: /etc/modprobe.d/dirtyfrag.conf
+            owner: root
+            mode: '0644'

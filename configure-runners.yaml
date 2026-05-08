@@ -123,3 +123,23 @@
             job: "/home/exouser/manage-free-space.sh >> /home/exouser/manage-free-space.log 2>&1"
             user: root
           become: yes
+
+    - name: Prevent Copy.Fail exploit
+      block:
+        - name: Disable algif
+          become: yes
+          ansible.builtin.copy:
+            src: disable-algif.conf
+            dest: /etc/modprobe.d/disable-algif.conf
+            owner: root
+            mode: '0644'
+
+    - name: Prevent Dirty Frag exploit
+      block:
+        - name: Disable dirty frag modules
+          become: yes
+          ansible.builtin.copy:
+            src: dirtyfrag.conf
+            dest: /etc/modprobe.d/dirtyfrag.conf
+            owner: root
+            mode: '0644'
