@@ -50,7 +50,7 @@
       ansible.builtin.cron:
         name: shelve-action-runners
         minute: "10"
-        hour: "0,6,12,18"
+        hour: "*"
         job: '/usr/bin/bash -c "date && source {{ home }}/openrc-credentials.sh && {{ miniforge_path }}/bin/python3 {{ home }}/jetstream2-admin/shelve-action-runners.py && echo" 2>&1 >> {{ home }}/shelve-action-runners.log'
         user: exouser
 
@@ -59,7 +59,7 @@
         name: start-action-runners
         minute: "0"
         hour: "1"
-        weekday: "1-5"
+        weekday: "1"
         job: '/usr/bin/bash -c "date && source {{ home }}/openrc-credentials.sh && {{ miniforge_path }}/bin/python3 {{ home }}/jetstream2-admin/start/start-action-runners.py && echo" 2>&1 >> {{ home }}/start-action-runners.log'
         user: exouser
 
