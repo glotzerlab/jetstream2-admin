@@ -19,12 +19,6 @@ all:
           hosts:
             actions-runner-gpu-0:
               ansible_host: 149.165.168.66
-            actions-runner-gpu-1:
-              ansible_host: 149.165.174.153
-            actions-runner-gpu-2:
-              ansible_host: 149.165.170.93
-            actions-runner-gpu-3:
-              ansible_host: 149.165.172.12
 
         cpu:
           vars:
