@@ -581,6 +581,7 @@ packages:
   - python >=3.10
   - python
   license: MIT
+  license_family: MIT
   run_exports: {}
   size: 26412
   timestamp: 1784376970393
