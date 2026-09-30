@@ -6,7 +6,7 @@ all:
 
       hosts:
         actions-runner-manager:
-          ansible_host: 149.165.175.133
+          ansible_host: actions-runner-manager.dmr140129.projects.jetstream-cloud.org
 
     action_runners:
       vars:
@@ -18,7 +18,7 @@ all:
             labels: GPU
           hosts:
             actions-runner-gpu-0:
-              ansible_host: 149.165.152.77
+              ansible_host: actions-runner-gpu-0.dmr140129.projects.jetstream-cloud.org
 
         cpu:
           vars:
