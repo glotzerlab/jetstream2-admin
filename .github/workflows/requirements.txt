@@ -58,5 +58,5 @@ typing-extensions==4.16.0
     # via
     #   keystoneauth1
     #   os-service-types
-urllib3==2.7.0
+urllib3==2.8.0
     # via requests
