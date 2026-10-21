@@ -1381,6 +1381,7 @@ packages:
   - _python_abi3_support 1.*
   - cpython >=3.11
   license: MIT
+  license_family: MIT
   run_exports: {}
   size: 370465
   timestamp: 1792530248588
