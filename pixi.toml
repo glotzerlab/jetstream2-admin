@@ -10,4 +10,4 @@ version = "0.1.0"
 [dependencies]
 python-openstackclient = "*"
 ansible = "*"
-python = "3.14.*"
+python = "3.15.*"
